@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Tim">
+	<title>购物车</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/car.css">
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+</head>
+<body>
+	<div class="buy-top">
+		<div class="layout">
+			<div class="nav-log cursor-p"></div>
+			<div class="car">
+				<p>购物车</p>
+				<div class="top-nav-l">
+					<div class="enterName"></div>
+					<h5>您好，欢迎来到麦包包！</h5>
+					<p>【<b class="cursor-p go-enter">登录</b>|<b class="cursor-p go-register">注册</b>】</p>
+					<h4 class="logOut">退出</h4>
+				</div>
+			</div>
+			<div class="car-right"><img src="img/car.gif"></div>
+		</div>
+	</div>
+	<div class="car-content ">
+		<div class="layout">
+			<div class="buy-hint">
+				<b>温馨提示：</b> 加入购物车的商品无法为您保留库存，请及时下单购买，商品价格以订单提交时的价格为准。
+			</div>
+			<div class="arrow"></div>
+			<div class="car-good">
+				<ul class="car-top">
+					<li>商品名称</li>
+					<li>单价</li>
+					<li>数量</li>
+					<li>小计</li>
+					<li>操作</li>
+				</ul>
+				<p class="no-good">您还没有挑选商品，赶快行动吧！ 马上去挑选商品>></p>
+				<ul class="car-center">
+					<li class="good-img">
+						<img src="img/maotou/001.jpg">
+					</li>
+					<li class="good-name"></li>
+					<li class="good-price">￥<span class="price-num"></span></li>
+					<li class="good-num">
+						<div class="minus">-</div>
+						<input type="text" name="" class="num" value="1">
+						<div class="add">+</div>
+					</li>
+					<li class="sum"></li>
+					<li class="good-handle">删除</li>
+				</ul>
+				<div class="car-footer">
+					<div class="car-footer-top">
+						<ul class="class-name">
+							<li>商品件数：</li>
+							<li>商品总金额(不含运费)：</li>
+							<li>麦豆抵扣：</li>
+							<li>运费：</li>
+						</ul>
+						<ul class="class-num">
+							<li>1件</li>
+							<li>￥269</li>
+							<li>-0.00</li>
+							<li>￥0.00</li>
+						</ul>
+					</div>
+					<div class="car-footer-bot">
+						<div class="no-freight">你可以享受免运费</div>
+						<div class="totalNum"><span>应付金额:</span><em class="allPrice">￥269</em></div>
+						<div class="account"><img src="img/account.gif"></div>
+					</div>
+				</div>
+			</div>		
+		</div>
+	</div>
+	<!-- switch-aside start -->
+	<div class="switch-aside">
+		<ul class="switchBox">
+			<li class="to-top cursor-p"><em class="iconfont">&#xe630;</em><span class="aside-text">回到顶部</span ></li>
+			<li class="chat cursor-p"><em class="iconfont">&#xe6df;</em><span class="aside-text">在线质询</span ></li>
+			<li class="buy-car cursor-p"><em class="iconfont">&#xf0082;</em><span class="aside-text">去购物车</span ></li>
+			<li class="qr-code cursor-p"><em class="iconfont">&#xe618;</em><span class="aside-text">二维码</span ></li>
+		</ul>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/cookie.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// 获取cookie
+		var name = getCookie("goodState");
+		if(name){
+			name = decodeURIComponent(name);
+			nameStr = JSON.parse(name);
+			// console.log(nameStr);
+			$(".good-name").html(nameStr[0]["goodName"]);
+			$(".price-num").html(nameStr[0].price);
+			// 
+			// console.log(nameStr[0].num,nameStr[0].num * nameStr[0].price);
+			$(".sum").html("￥" + (nameStr[0].num * nameStr[0].price).toFixed(2));
+			$(".class-num").find("li").eq(1).html("￥" + (nameStr[0].num * nameStr[0].price).toFixed(2));
+			$(".class-num").find("li").eq(0).html(nameStr[0].num + "件");
+			$(".totalNum em").html("￥" + (nameStr[0].num * $(".good-price .price-num").html()).toFixed(2));
+		}else{
+			$(".car-center").css("display","none");
+			$(".good-img").find("img").attr({"src":""});
+			$(".no-good").css({"display":"block"});
+			//  初始化
+			$(".sum").html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".class-num").find("li").eq(1).html("￥" + (0 * $(".good-price .price-num").html()).toFixed(2));
+			$(".class-num").find("li").eq(0).html(0 + "件");
+			$(".totalNum em").html("￥" + (0 * $(".good-price .price-num").html()).toFixed(2));
+		}
+		$(".good-handle").click(function(){
+			//  清空cookie
+			setCookie("goodState","",-1);
+			// 刷新页面
+			location.href = "http://localhost/buybag-items/buycar.html";
+		});
+	});
+
+	$(function(){
+		var numVal = 0;
+		$(".minus").click(function(){
+			numVal = $(".num").val();
+			if(numVal > 1){
+				numVal -=1;
+			}
+			if(numVal == 1){
+				alert("最后一个了不能再减了,点击删除可以移除该商品");
+			}
+			$(".num").val(numVal);
+			// 改变总价格
+			$(".sum").html(numVal * $(".good-price").val());
+			$(".sum").html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".totalNum em").html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".class-num").find("li").eq(1).html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".class-num").find("li").eq(0).html(numVal + "件");
+
+
+		});
+		$(".add").click(function(){
+			numVal = $(".num").val();
+			numVal++;
+			if(numVal > 5){
+				numVal = 5;
+				alert("一次最多只能购买5件");
+			}
+			$(".num").val(numVal);
+			$(".sum").html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".totalNum em").html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".class-num").find("li").eq(1).html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".class-num").find("li").eq(0).html(numVal + "件");
+			// 修改cookie中的值
+			var goodStr = getCookie($(".goodState").html());
+			goodStr = goodStr ? goodStr : "[]";
+			//  将goodStr转换为JSON数据
+			var goodArr = JSON.parse(goodStr);
+			goodArr.push({
+				"goodName":$(".good-name").html(),
+				"price":$(".price-num").html(),
+				"num":numVal
+			});
+			setCookie("goodState",JSON.stringify(goodArr),3);
+
+		});
+		// 添加$(".num") 焦点事件
+		$(".num").on("blur",function(){
+			numVal = $(".num").val();
+			if(numVal > 5){
+				numVal = 5;
+				alert("一次最多只能购买5件");
+			}
+			$(".num").val(numVal);
+			$(".sum").html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".totalNum em").html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".class-num").find("li").eq(1).html("￥" + (numVal * $(".good-price .price-num").html()));
+			$(".class-num").find("li").eq(0).html(numVal + "件");
+		});
+	});
+
+</script>

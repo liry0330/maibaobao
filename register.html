@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="auther" content="">
+	<meta name="viewport" content="width=device-width" />
+	<title>麦包包页面顶部</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/register.css">
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+</head>
+<body>
+	<!-- 定义一个标签存放头部 -->
+	<div id="registerHeader"></div>
+	<!-- register-box start -->
+	<div class="register-box">
+		<div class="register layout border-box">
+			<div class="register-top border-box">欢迎注册麦包包网站</div>
+			<form class="register-footer" action="" method="" name="f1">
+				<div class="register-msg">
+					<div>
+						<em>手机号码：</em>
+						<input type="text" id="inpName" name="">
+						<span class="phone-rule"></span>
+					</div><br />
+					<div>
+						<em>设置密码：</em>
+						<input type="password" id="inpPwd" name="">
+						<span class="pdw-rule"></span>
+					</div><br />
+					<div>
+						<em>确认密码：</em>
+						<input type="password" id="pwdAffirm" name="">
+						<span class="pdw-affirm"></span>
+					</div><br />
+					<div>
+						<em>验证码：</em>
+						<span class="verify-code">
+							<a href="javascript:;" id="getCode">免费获取验证码<span class="getcode-arrow">
+							</a>
+						</span>
+						<input type="text" id="verifyPdw" name="">
+						<span class="verify-msg"></span>
+					</div><br />
+					<div id="refer"><span>提交注册</span><span class="arrow"></span></div>
+					<div class="last-div"><input type="checkbox" id="dealCheck" checked="checked" name=""><span>我已经阅读并同意</span><a href="javascript:;">《麦包包用户服务协议》</a></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/cookie.js"></script>
+<script type="text/javascript">
+	// 导入头部
+	$("#registerHeader").load("header.html");
+	//  设置正则判断
+	var pName = /^1\d{10}$/;
+	var pPwd = /^[0-9a-zA-Z]{6,20}$/;
+	// 添加表单框得到焦点事件
+	$("#inpName").on("focus",function(){
+		$(this).css({"outline":"none","border":"1px #f00 solid","box-shadow":"0 0 6px #f00"},function(){
+		});
+		// 显示注册提示
+		$(".phone-rule").html("请真确填写11位手机号并进行验证");
+	});
+	$("#inpPwd").focus(function(){
+		$(this).css({"outline":"none","border":"1px #f00 solid","box-shadow":"0 0 6px #f00"},function(){
+		});
+		// 显示注册提示
+		$(".pdw-rule").html("请输入6-20位的密码，可以是数字字母组合");
+	});
+	$("#pwdAffirm").focus(function(){
+		$(this).css({"outline":"none","border":"1px #f00 solid","box-shadow":"0 0 6px #f00"},function(){
+		});
+		// 显示注册提示
+		$(".pdw-affirm").html("请输入6-20位的密码，可以是数字字母组合");
+	});
+	$("#verifyPdw").focus(function(){
+		$(this).css({"outline":"none","border":"1px #f00 solid","box-shadow":"0 0 6px #f00"},function(){
+		});
+		// 显示注册提示
+		$(".verify-msg").html("请输入短信验证码");
+	});
+	// 添加表单失去焦点事件
+	$("#inpName").on("blur",function(){
+		$(this).css({"border":"1px #ccc solid","box-shadow":"0 0 "},function(){
+		});
+		// 获取表单输入的内容
+		var nameStr = $("#inpName").val();
+		// 判断用户是否已经存在
+		var cookieStr = getCookie(nameStr);
+		if(cookieStr.length != 0){
+			$(".phone-rule").html("<span class='err-ico'>&#xe643;用户名已存在，请登录</span>");
+		}
+		// 判断表单内容
+		if(nameStr.length==0){
+			// 隐藏注册提示
+			$(".phone-rule").html("");
+		}else{
+			if(pName.test(nameStr)){
+				// 显示输入正确提示
+				$(".phone-rule").html("<span class='suc-ico'>&#xe63c;</span>");
+			}else{
+				$(".phone-rule").html("<span class='err-ico'>&#xe643;手机号码格式错误，请重新填写</span>");
+			}
+		}	
+	});
+	$("#inpPwd").blur(function(){
+		$(this).css({"border":"1px #ccc solid","box-shadow":"0 0 "},function(){
+		});
+		var pwdStr = $("#inpPwd").val();
+		if(pwdStr.length == 0){
+			// 隐藏注册提示
+			$(".pdw-rule").html("");
+		}else{
+			if(pPwd.test(pwdStr)){
+				$(".pdw-rule").html("<span class='suc-ico'>&#xe63c;</span>");
+			}else{
+				$(".pdw-rule").html("<span class='err-ico'>&#xe643;格式错误，请使用字母加数字或符号的组合，请使用6-20个字符</span>");
+			}
+		}
+	});
+	$("#pwdAffirm").blur(function(){
+		$(this).css({"border":"1px #ccc solid","box-shadow":"0 0 "},function(){
+		});
+		// 判断是否输入密码
+		if($("#inpPwd").val().length == 0){
+			$(".pdw-affirm").html("");
+		}else {
+			if($("#inpPwd").val() == $("#pwdAffirm").val()){
+				$(".pdw-affirm").html("<span class='suc-ico'>&#xe63c;</span>");
+			}else{
+				$(".pdw-affirm").html("<span class='err-ico'>&#xe643;两次密码输入不一致，请重新输入</span>");
+			}
+		}
+	});
+	$("#verifyPdw").blur(function(){
+		$(this).css({"border":"1px #ccc solid","box-shadow":"0 0 "},function(){
+		});
+		// 隐藏注册提示
+		$(".verify-msg").css("display","none");
+	});
+	// $("#getCode").click(function(){
+	// 	// 清空verify-code中的元素
+	// 	$(".verify-code").html("");
+	// 	// 创建验证码输入框，获取验证码，
+
+	// 	$(".verify-code").html("<input type='text' class='ver-inp' /><span class='vercod'></span><a class='change-code'>换一张？</a><span class='verify-send cursor-p'>确认发送</span>");
+	// 	// 设置创建出来的元素
+	// 	$(".ver-inp").css({"width": "86","height":"32"});
+	// });
+	//  点击注册
+	$("#refer").click(function(){
+		var nameStr = $("#inpName").val();
+		var pdwStr = $("#inpPwd").val();
+		if(pName.test($("#inpName").val()) && pPwd.test($("#inpPwd").val()) && $("#inpPwd").val() == $("#pwdAffirm").val()){
+			setCookie(nameStr,pdwStr,7);
+
+			// 注册成功后跳转到登录页面 
+			location.href = "http://localhost/buybag-items/enter.html";
+		}
+	});
+
+</script>
