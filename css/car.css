@@ -1,0 +1,208 @@
+@charset "UTF-8";
+.layout {
+  width: 960px;
+  margin: 0 auto; }
+
+.buy-top {
+  min-width: 960px;
+  border-bottom: 2px #ED1C22 solid; }
+
+.buy-top div.layout {
+  margin-top: 27px;
+  height: 63px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  position: relative; }
+
+.nav-log {
+  margin-right: 27px; }
+
+.car > p {
+  font-size: 20px;
+  line-height: 39px; }
+
+.car-right {
+  height: 52px;
+  width: 419px;
+  position: absolute;
+  right: 0;
+  top: 10px; }
+
+.car-content {
+  min-width: 960px;
+  background-color: #F0F0F0; }
+
+.car-content .layout {
+  width: 960px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-top: 50px;
+  position: relative; }
+
+.buy-hint {
+  padding-left: 10px;
+  height: 48px;
+  width: 948px;
+  border: 1px #D7D7D7 solid;
+  line-height: 48px;
+  color: #666;
+  background-color: #fff; }
+
+.car-content .arrow {
+  border: 4px #F0F0F0 solid;
+  border-top-color: #fff;
+  position: absolute;
+  left: 32px;
+  top: 99px; }
+
+/* car-good start */
+.car-good {
+  margin-top: 10px;
+  width: 960px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  padding-top: 15px;
+  overflow: hidden;
+  border-bottom: 2px #666 solid;
+  background-color: #fff; }
+
+.no-good {
+  display: none;
+  font-size: 20px;
+  text-align: center;
+  font-family: "宋体"; }
+
+.car-top {
+  height: 30px;
+  width: 930px;
+  overflow: hidden;
+  line-height: 30px;
+  border-bottom: 1px #666666 solid; }
+
+.car-top li {
+  float: left;
+  font-weight: bold; }
+
+.car-top li:first-child {
+  margin-left: 180px; }
+
+.car-top li:nth-child(2) {
+  margin-left: 360px; }
+
+.car-top li:nth-child(3) {
+  margin-left: 80px; }
+
+.car-top li:nth-child(4) {
+  margin-left: 90px; }
+
+.car-top li:last-child {
+  margin-left: 50px; }
+
+/* car-center start */
+.car-center {
+  height: 95px;
+  width: 930px;
+  box-sizing: border-box;
+  border-bottom: 2px #666 dashed; }
+
+.car-center li {
+  float: left; }
+
+.good-img {
+  padding-top: 20px;
+  padding-left: 23px; }
+
+.good-name {
+  width: 250px;
+  margin-top: 30px;
+  margin-left: 22px; }
+
+.good-price {
+  margin-top: 35px;
+  line-height: 20px;
+  margin-left: 220px; }
+
+.car-center .good-num {
+  margin-top: 35px;
+  margin-left: 50px;
+  width: 70px;
+  height: 20px; }
+
+.car-center .good-num div {
+  height: 9px;
+  width: 9px;
+  line-height: 9px;
+  margin-top: 5px;
+  float: left;
+  cursor: pointer;
+  text-align: center;
+  border: 1px #CBCBCB solid; }
+
+.car-center .good-num div:first-child {
+  margin-right: 7px; }
+
+.car-center .good-num div:last-child {
+  margin-left: 7px; }
+
+.good-num input {
+  text-align: center;
+  float: left;
+  width: 30px;
+  height: 18px; }
+
+.sum {
+  margin-left: 50px;
+  margin-top: 35px;
+  color: #f00; }
+
+.good-handle {
+  cursor: pointer;
+  margin-top: 35px;
+  margin-left: 40px; }
+
+/* car-footer start */
+.car-footer {
+  position: relative;
+  margin-top: 95px;
+  float: right; }
+
+.car-footer-top {
+  overflow: hidden; }
+
+.car-footer-top ul {
+  overflow: hidden;
+  line-height: 25px;
+  float: left; }
+
+.class-name {
+  text-align: right;
+  text-align: right; }
+
+.class-num {
+  width: 50px;
+  text-align: left; }
+
+.car-footer-bot {
+  float: right;
+  margin-bottom: 35px; }
+
+.no-freight {
+  height: 25px;
+  width: 130px;
+  margin-left: 80px;
+  background-color: #E6E8E3;
+  color: #f00;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 32px; }
+
+.totalNum {
+  margin-left: 66px;
+  margin-bottom: 25px; }
+
+.account {
+  cursor: pointer; }
+
+/*# sourceMappingURL=car.css.map */
